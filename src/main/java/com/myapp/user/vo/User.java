@@ -9,8 +9,6 @@ public class User {
 	private String status;	
 	private Post post;
 	
-	
-	
 	public int getId() {
 		return id;
 	}
