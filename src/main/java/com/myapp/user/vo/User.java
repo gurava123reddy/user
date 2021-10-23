@@ -6,7 +6,11 @@ public class User {
 	private String name;
 	private String email;
 	private String gender;
-	private String status;
+	private String status;	
+	private Post post;
+	
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -42,6 +46,12 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", gender=" + gender + ", status=" + status
 				+ "]";
+	}
+	public Post getPost() {
+		return post;
+	}
+	public void setPost(Post post) {
+		this.post = post;
 	}
 	
 	

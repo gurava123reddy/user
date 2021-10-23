@@ -14,16 +14,6 @@ import com.myapp.user.vo.UserList;
 @Service
 public class UserServiceImpl implements UserService {
 	
-    @Override
-	public List<User> getUsers(){
-		
-		RestTemplate restTemplate = new RestTemplate();
-		String fooResourceUrl = "https://gorest.co.in/public/v1/users";
-		ResponseEntity<UserList> response
-		  = restTemplate.getForEntity(fooResourceUrl, UserList.class);
-		return response.getBody().getData();
-		
-	}
     
     @Override
     public List<Post> getPosts(){
@@ -37,18 +27,33 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
-   	public List<User> getUsers1(){
+   	public List<User> getUsers(){
    		
    		RestTemplate restTemplate = new RestTemplate();
    		String fooResourceUrl = "https://gorest.co.in/public/v1/users";
    		String fooResourceUrl1 = "https://gorest.co.in/public/v1/posts";
    		ResponseEntity<UserList> response
    		  = restTemplate.getForEntity(fooResourceUrl, UserList.class );
+   		List<User> users = response.getBody().getData();
    		
    		ResponseEntity<PostList> response1
  		  = restTemplate.getForEntity(fooResourceUrl1, PostList.class );
+   		List<Post> posts = response1.getBody().getData();
    		
-   		return response.getBody().getData();
+   		
+   		for(Post post: posts) {
+   			for(User user: users) {
+   				if(post.getUser_id() == user.getId()) {   					
+   					user.setPost(post);
+   					break;
+   					
+   				}
+   				
+   			}
+   		}	
+   		
+   		
+   		return users;
    		
    	}
     
