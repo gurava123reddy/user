@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myapp.user.service.UserService;
+import com.myapp.user.vo.Post;
 import com.myapp.user.vo.User;
 
 @RestController
@@ -36,6 +37,7 @@ public class UserController {
 	public User getUser(@RequestParam int id){
 		
 		List<User>  userList = userService.getUsers();	
+		List<Post>  postList = userService.getPosts();
 		
 		User user = null;
 		for(User u: userList) {
@@ -47,6 +49,28 @@ public class UserController {
 		}
 		return user;
 	}
+	
+	@GetMapping("/user1")	
+	public User getUser1(@RequestParam int user_id){
+		
+		List<User>  userList = userService.getUsers();	
+		List<Post>  postList = userService.getPosts();
+		
+		User user = null;
+		for(User u: userList) {
+			for(Post p: postList) {				
+				if(u.getId()==p.getUser_id()) {
+					user = u;
+					break;
+				}
+				
+			}
+			
+			}	
+		return user;
+	}
+		
+		
 	
 	@PostMapping("/users")
 	public User createUser(@Valid @RequestBody User requestUserDetails) {
@@ -62,6 +86,47 @@ public class UserController {
         return returnValue;
 		
 	}
+	
+	@GetMapping("/posts")
+    public List<Post> getPosts(){
+		
+		List<Post> postList = userService.getPosts();		
+		return postList;		
+	}
+	
+	@GetMapping("/post")	
+	public Post getPost(@RequestParam int id){
+		
+		List<Post>  postList = userService.getPosts();	
+		
+		Post post = null;
+		for(Post p: postList) {
+			
+			if(p.getId()==id) {
+				post = p;
+				break;
+			}			
+		}
+		return post;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 		
 		
 	
