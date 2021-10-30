@@ -11,6 +11,7 @@ import com.myapp.user.vo.PostList;
 import com.myapp.user.vo.User;
 import com.myapp.user.vo.UserList;
 
+//implementing UserService
 @Service
 public class UserServiceImpl implements UserService {
 	
@@ -51,8 +52,6 @@ public class UserServiceImpl implements UserService {
    				
    			}
    		}	
-   		//testing
-   		
    		
    		return users;
    		
